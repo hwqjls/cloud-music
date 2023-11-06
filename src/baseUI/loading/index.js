@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import style from '../../assets/global-style';
 
 const loading = keyframes`
@@ -32,9 +32,9 @@ const LoadingWrapper = styled.div`
  }
 `
 
-function Loading () {
+function Loading({ show }) {
   return (
-    <LoadingWrapper>
+    <LoadingWrapper style={{ display: show ? '' : 'none' }}>
       <div></div>
       <div></div>
     </LoadingWrapper>

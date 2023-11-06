@@ -1,24 +1,30 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types'
-import BScroll from 'better-scroll'
-import styled from 'styled-components';
+import React, { forwardRef, useState, useEffect, useRef, useImperativeHandle, useMemo } from "react"
+import PropTypes from "prop-types"
+import BScroll from "better-scroll"
+import { debounce } from "../../api/utils";
+import Loading from '../loading';
+import LoadingV2 from '../loading-v2';
+import { ScrollContainer, PullUpLoading, PullDownLoading } from './style'
 
-const ScrollContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`
-
-//函数式组件天生不具备被上层组件直接调用 ref 的条件，因此需要用 React 当中一些特殊的方式来处理，即使用 forwardRef 进行包裹
 const Scroll = forwardRef((props, ref) => {
   const [bScroll, setBScroll] = useState();
-  const scrollContainerRef = useRef();
-  const { direction, click, refresh, bounceTop, bounceBottom } = props;
-  const { pullUp, pullDown, onScroll } = props;
 
-  // 创建 better-scroll
+  const scrollContaninerRef = useRef();
+
+  const { direction, click, refresh, bounceTop, bounceBottom } = props;
+
+  const { pullUp, pullDown, onScroll, pullUpLoading, pullDownLoading } = props;
+
+  let pullUpDebounce = useMemo(() => {
+    return debounce(pullUp, 300)
+  }, [pullUp]);
+
+  let pullDownDebounce = useMemo(() => {
+    return debounce(pullDown, 300)
+  }, [pullDown]);
+
   useEffect(() => {
-    const scroll = new BScroll(scrollContainerRef.current, {
+    const scroll = new BScroll(scrollContaninerRef.current, {
       scrollX: direction === "horizental",
       scrollY: direction === "vertical",
       probeType: 3,
@@ -32,64 +38,57 @@ const Scroll = forwardRef((props, ref) => {
     return () => {
       setBScroll(null);
     }
-  }, [direction, click, bounceTop, bounceBottom])
+    // eslint-disable-next-line
+  }, []);
 
-  //每次重新渲染都要刷新实例，防止无法滑动
-  useEffect(() => {
-    if (refresh && bScroll) {
-      bScroll.refresh()
-    }
-  })
-
-  //给实例绑定 scroll 事件
   useEffect(() => {
     if (!bScroll || !onScroll) return;
-
     bScroll.on('scroll', (scroll) => {
       onScroll(scroll);
     })
     return () => {
       bScroll.off('scroll');
     }
-  }, [onScroll, bScroll])
+  }, [onScroll, bScroll]);
 
-  //进行上拉到底的判断，调用上拉刷新的函数
   useEffect(() => {
     if (!bScroll || !pullUp) return;
-
     bScroll.on('scrollEnd', () => {
-      // 判断是否滑动到了底部
+      //判断是否滑动到了底部
       if (bScroll.y <= bScroll.maxScrollY + 100) {
-        pullUp()
+        pullUpDebounce();
       }
-    })
-
+    });
     return () => {
       bScroll.off('scrollEnd');
     }
-  }, [pullUp, bScroll])
+  }, [pullUpDebounce, pullUp, bScroll]);
 
-  //进行下拉的判断，调用下拉刷新的函数
   useEffect(() => {
     if (!bScroll || !pullDown) return;
-
     bScroll.on('touchEnd', (pos) => {
-      // 判断用户下拉动作
-      if(pos.y > 50) {
-        pullDown();
+      //判断用户的下拉动作
+      if (pos.y > 50) {
+        pullDownDebounce();
       }
     });
-
     return () => {
       bScroll.off('touchEnd');
     }
-  }, [pullDown, bScroll])
+  }, [pullDownDebounce, pullDown, bScroll]);
 
-  useImperativeHandle(ref, ()=>({
-    refresh(){
+
+  useEffect(() => {
+    if (refresh && bScroll) {
+      bScroll.refresh();
+    }
+  });
+
+  useImperativeHandle(ref, () => ({
+    refresh() {
       if (bScroll) {
         bScroll.refresh();
-        bScroll.scrollTo(0,0);
+        bScroll.scrollTo(0, 0);
       }
     },
     getBScroll() {
@@ -97,26 +96,20 @@ const Scroll = forwardRef((props, ref) => {
         return bScroll;
       }
     }
-  }))
+  }));
 
+  const PullUpdisplayStyle = pullUpLoading ? { display: "" } : { display: "none" };
+  const PullDowndisplayStyle = pullDownLoading ? { display: "" } : { display: "none" };
   return (
-    <ScrollContainer ref={scrollContainerRef}>
+    <ScrollContainer ref={scrollContaninerRef}>
       {props.children}
+      {/* 滑到底部加载动画 */}
+      <PullUpLoading style={PullUpdisplayStyle}><Loading></Loading></PullUpLoading>
+      {/* 顶部下拉刷新动画 */}
+      <PullDownLoading style={PullDowndisplayStyle}><LoadingV2></LoadingV2></PullDownLoading>
     </ScrollContainer>
-  )
+  );
 })
-
-Scroll.propTypes = {
-  direction: PropTypes.oneOf(['vertical', 'horizental']),// 滚动的方向
-  refresh: PropTypes.bool,// 是否刷新
-  onScroll: PropTypes.func,// 滑动触发的回调函数
-  pullUp: PropTypes.func,// 上拉加载逻辑
-  pullDown: PropTypes.func,// 下拉加载逻辑
-  pullUpLoading: PropTypes.bool,// 是否显示上拉 loading 动画
-  pullDownLoading: PropTypes.bool,// 是否显示下拉 loading 动画
-  bounceTop: PropTypes.bool,// 是否支持向上吸顶
-  bounceBottom: PropTypes.bool// 是否支持向下吸底
-};
 
 Scroll.defaultProps = {
   direction: "vertical",
@@ -131,4 +124,16 @@ Scroll.defaultProps = {
   bounceBottom: true
 };
 
-export default React.memo(Scroll)
+Scroll.propTypes = {
+  direction: PropTypes.oneOf(['vertical', 'horizental']),
+  refresh: PropTypes.bool,
+  onScroll: PropTypes.func,
+  pullUp: PropTypes.func,
+  pullDown: PropTypes.func,
+  pullUpLoading: PropTypes.bool,
+  pullDownLoading: PropTypes.bool,
+  bounceTop: PropTypes.bool,//是否支持向上吸顶
+  bounceBottom: PropTypes.bool//是否支持向上吸顶
+};
+
+export default Scroll;

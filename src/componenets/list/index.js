@@ -4,7 +4,7 @@ import {
   ListItem,
   List
 } from './style';
-import { getCount } from './../../api/util.js'
+import { getCount } from './../../api/utils.js'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function RecommendList({ recommendList }) {

@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Horizen from '../../baseUI/horizen-item';
@@ -15,10 +15,12 @@ import {
   changePullDownLoading,
   refreshMoreHotSingerList
 } from './store/actionCreators';
+import Loading from '../../baseUI/loading'
 
 const renderSingerList = (props) => {
   const { singerList } = props;
-  const list = singerList ? singerList.toJS(): [];
+  const list = singerList ? singerList.toJS() : [];
+
   return (
     <List>
       {list.map((item, index) => {
@@ -39,10 +41,15 @@ const renderSingerList = (props) => {
 }
 
 function Singer(props) {
-  const { singerList } = props;
-  const { updateDispatch } = props;
+  const { singerList, enterLoading, pageCount, pullUpLoading, pullDownLoading } = props;
+  const { getHotSingerDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
   let [category, setCategory] = useState('');
   let [alpha, setAlpha] = useState('');
+
+  useEffect(() => {
+    getHotSingerDispatch();
+    // eslint-disable-next-line
+  }, []);
 
   let handleUpdateAlpha = (val) => {
     setAlpha(val);
@@ -52,6 +59,14 @@ function Singer(props) {
   let handleUpdateCategory = (val) => {
     setCategory(val);
     updateDispatch(val, alpha)
+  }
+
+  const handlePullUp = () => {
+    pullUpRefreshDispatch(category, alpha, category === '', pageCount);
+  }
+
+  const handlePullDown = () => {
+    pullDownRefreshDispatch(category, alpha)
   }
   return (
     <NavContainer>
@@ -66,9 +81,14 @@ function Singer(props) {
         handleClick={handleUpdateAlpha}
         oldVal={alpha} />
       <ListContainer>
-        <Scroll>
-          {renderSingerList({singerList})}
+        <Scroll
+          pullUp={handlePullUp}
+          pullDown={handlePullDown}
+          pullUpLoading={pullUpLoading}
+          pullDownLoading={pullDownLoading}>
+          {renderSingerList({ singerList })}
         </Scroll>
+        <Loading show={enterLoading}></Loading>
       </ListContainer>
     </NavContainer>
   )
