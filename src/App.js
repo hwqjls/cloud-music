@@ -7,12 +7,16 @@ import store from './store/index'
 import { RouterProvider } from 'react-router-dom';
 import router from './routes/index.js';
 
+import { Data } from './application/Singers/data'
+
 function App() {
   return (
     <Provider store={store}>
       <GlobalStyle></GlobalStyle>
       <IconStyle></IconStyle>
-      <RouterProvider router={router} />
+      <Data>
+        <RouterProvider router={router} />
+      </Data>
     </Provider>
   );
 }

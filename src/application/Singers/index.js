@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { useState, memo, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Horizen from '../../baseUI/horizen-item';
@@ -16,6 +16,7 @@ import {
   refreshMoreHotSingerList
 } from './store/actionCreators';
 import Loading from '../../baseUI/loading'
+import { CategoryDataContext, CHANGE_ALPHA, CHANGE_CATEGORY } from './data';
 
 const renderSingerList = (props) => {
   const { singerList } = props;
@@ -43,21 +44,27 @@ const renderSingerList = (props) => {
 function Singer(props) {
   const { singerList, enterLoading, pageCount, pullUpLoading, pullDownLoading } = props;
   const { getHotSingerDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
-  let [category, setCategory] = useState('');
-  let [alpha, setAlpha] = useState('');
+  // let [category, setCategory] = useState('');
+  // let [alpha, setAlpha] = useState('');
+  const { data, dispatch } = useContext(CategoryDataContext)
+  const { category, alpha } = data.toJS()
 
   useEffect(() => {
-    getHotSingerDispatch();
+    if (!singerList.size) {
+      getHotSingerDispatch();
+    }
     // eslint-disable-next-line
   }, []);
 
   let handleUpdateAlpha = (val) => {
-    setAlpha(val);
+    // setAlpha(val);
+    dispatch({ type: CHANGE_ALPHA, data: val })
     updateDispatch(category, val)
   }
 
   let handleUpdateCategory = (val) => {
-    setCategory(val);
+    // setCategory(val);
+    dispatch({ type: CHANGE_CATEGORY, data: val })
     updateDispatch(val, alpha)
   }
 
