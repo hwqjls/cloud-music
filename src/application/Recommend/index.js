@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
+import { Outlet } from "react-router-dom";
 import { Content } from './style'
 import Slider from '../../componenets/slider';
 import RecommendList from '../../componenets/list';
@@ -32,6 +33,7 @@ function Recommend(props) {
         </div>
       </Scroll>
       {enterLoading ? <Loading></Loading> : null}
+      <Outlet />
     </Content>
   )
 }
