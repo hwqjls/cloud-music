@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import style from '../../assets/global-style';
-import PropTypes from 'prop-types'
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -25,23 +25,29 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = React.forwardRef((props, ref) => {
-  const { title, handleClick } = props;
+  const { title, handleClick, isMarquee } = props;
   return (
     <HeaderContainer ref={ref}>
       <i className="iconfont back" onClick={handleClick}>&#xe655;</i>
-      <h1>{title}</h1>
+      {
+        // eslint-disable-next-line 
+        isMarquee ? <marquee><h1>{title}</h1></marquee> :
+          <h1>{title}</h1>
+      }
     </HeaderContainer>
   )
 })
 
 Header.defaultProps = {
   handleClick: () => { },
-  title: '标题'
+  title: '标题',
+  isMarquee: false,
 };
 
 Header.propTypes = {
   handleClick: PropTypes.func,
   title: PropTypes.string,
+  isMarquee: PropTypes.bool
 };
 
 export default React.memo(Header);

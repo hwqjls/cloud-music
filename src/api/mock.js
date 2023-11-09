@@ -63,119 +63,119 @@ export const categoryTypes = [{
 
 // 歌手首字母
 export const alphaTypes = [{
-    key: "A",
-    name: "A"
-  },
-  {
-    key: "B",
-    name: "B"
-  },
-  {
-    key: "C",
-    name: "C"
-  },
-  {
-    key: "D",
-    name: "D"
-  },
-  {
-    key: "E",
-    name: "E"
-  },
-  {
-    key: "F",
-    name: "F"
-  },
-  {
-    key: "G",
-    name: "G"
-  },
-  {
-    key: "H",
-    name: "H"
-  },
-  {
-    key: "I",
-    name: "I"
-  },
-  {
-    key: "J",
-    name: "J"
-  },
-  {
-    key: "K",
-    name: "K"
-  },
-  {
-    key: "L",
-    name: "L"
-  },
-  {
-    key: "M",
-    name: "M"
-  },
-  {
-    key: "N",
-    name: "N"
-  },
-  {
-    key: "O",
-    name: "O"
-  },
-  {
-    key: "P",
-    name: "P"
-  },
-  {
-    key: "Q",
-    name: "Q"
-  },
-  {
-    key: "R",
-    name: "R"
-  },
-  {
-    key: "S",
-    name: "S"
-  },
-  {
-    key: "T",
-    name: "T"
-  },
-  {
-    key: "U",
-    name: "U"
-  },
-  {
-    key: "V",
-    name: "V"
-  },
-  {
-    key: "W",
-    name: "W"
-  },
-  {
-    key: "X",
-    name: "X"
-  },
-  {
-    key: "Y",
-    name: "Y"
-  },
-  {
-    key: "Z",
-    name: "Z"
-  }
+  key: "A",
+  name: "A"
+},
+{
+  key: "B",
+  name: "B"
+},
+{
+  key: "C",
+  name: "C"
+},
+{
+  key: "D",
+  name: "D"
+},
+{
+  key: "E",
+  name: "E"
+},
+{
+  key: "F",
+  name: "F"
+},
+{
+  key: "G",
+  name: "G"
+},
+{
+  key: "H",
+  name: "H"
+},
+{
+  key: "I",
+  name: "I"
+},
+{
+  key: "J",
+  name: "J"
+},
+{
+  key: "K",
+  name: "K"
+},
+{
+  key: "L",
+  name: "L"
+},
+{
+  key: "M",
+  name: "M"
+},
+{
+  key: "N",
+  name: "N"
+},
+{
+  key: "O",
+  name: "O"
+},
+{
+  key: "P",
+  name: "P"
+},
+{
+  key: "Q",
+  name: "Q"
+},
+{
+  key: "R",
+  name: "R"
+},
+{
+  key: "S",
+  name: "S"
+},
+{
+  key: "T",
+  name: "T"
+},
+{
+  key: "U",
+  name: "U"
+},
+{
+  key: "V",
+  name: "V"
+},
+{
+  key: "W",
+  name: "W"
+},
+{
+  key: "X",
+  name: "X"
+},
+{
+  key: "Y",
+  name: "Y"
+},
+{
+  key: "Z",
+  name: "Z"
+}
 ];
 
 // 歌手列表
-export const singerList = [1, 2,3, 4,5,6,7,8,9,10,11,12].map (item => {
+export const singerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => {
   return {
     picUrl: "https://p2.music.126.net/uTwOm8AEFFX_BYHvfvFcmQ==/109951164232057952.jpg",
     name: "隔壁老樊",
     accountId: 277313426,
   }
-}); 
+});
 
 //排行榜编号
 export const RankTypes = {
@@ -204,3 +204,89 @@ export const RankTypes = {
   "22": "云音乐ACG音乐榜",
   "23": "江小白YOLO云音乐说唱榜"
 };
+
+//专辑数据
+export const currentAlbum = {
+  creator: {
+    avatarUrl: "http://p1.music.126.net/O9zV6jeawR43pfiK2JaVSw==/109951164232128905.jpg",
+    nickname: "浪里推舟"
+  },
+  coverImgUrl: "http://p2.music.126.net/ecpXnH13-0QWpWQmqlR0gw==/109951164354856816.jpg",
+  subscribedCount: 2010711,
+  name: "听完就睡，耳机是天黑以后柔软的梦境",
+  tracks: [
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+    {
+      name: "我真的受伤了",
+      ar: [{ name: "张学友" }, { name: "周华健" }],
+      al: {
+        name: "学友 热"
+      }
+    },
+  ]
+}
+
+//顶部的高度
+export const HEADER_HEIGHT = 45;
