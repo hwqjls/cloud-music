@@ -32,6 +32,13 @@ const router = createBrowserRouter([
       {
         path: 'rank',
         element: <Rank />,
+        key: 'rank',
+        children: [
+          {
+            path: ':id',
+            element: <Album />
+          }
+        ]
       }
     ]
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
@@ -30,14 +30,14 @@ function Album(props) {
   }, [getAlbumDataDispatch, id])
 
   const goBack = () => {
-    navigate('/recommend')
+    navigate(-1)
   }
 
-  const handleClick = () => {
+  const handleBack = useCallback(() => {
     setShowStatus(false)
-  }
+  }, []);
 
-  const handleScroll = (pos) => {
+  const handleScroll = useCallback((pos) => {
     let minScrollY = -HEADER_HEIGHT;
     let percent = Math.abs(pos.y / minScrollY);
     let headerDom = headerEl.current;
@@ -53,7 +53,7 @@ function Album(props) {
       setTitle("歌单");
       setIsMarquee(false);
     }
-  }
+  }, [currentAlbum]);
 
   const renderTopDesc = () => {
     return (
@@ -149,7 +149,7 @@ function Album(props) {
       onExited={goBack}
     >
       <Container ref={nodeRef}>
-        <Header ref={headerEl} title={title} handleClick={handleClick} isMarquee={isMarquee}></Header>
+        <Header ref={headerEl} title={title} handleClick={handleBack} isMarquee={isMarquee}></Header>
         {
           !isEmptyObject(currentAlbum) ? (
             <Scroll bounceTop={false} onScroll={handleScroll}>
@@ -161,7 +161,7 @@ function Album(props) {
             </Scroll>
           ) : null
         }
-        { enterLoading ? <Loading></Loading> : null}
+        {enterLoading ? <Loading></Loading> : null}
       </Container>
     </CSSTransition>
   )
