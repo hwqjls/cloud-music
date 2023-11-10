@@ -1,5 +1,6 @@
 import React, { useState, memo, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Horizen from '../../baseUI/horizen-item';
 import Scroll from './../../baseUI/scroll'
@@ -19,14 +20,18 @@ import Loading from '../../baseUI/loading'
 import { CategoryDataContext, CHANGE_ALPHA, CHANGE_CATEGORY } from './data';
 
 const renderSingerList = (props) => {
-  const { singerList } = props;
+  const { singerList, navigate } = props;
   const list = singerList ? singerList.toJS() : [];
+
+  const enterDetail = (detail) => {
+    navigate(`/singers/${detail.id}`);
+  }
 
   return (
     <List>
       {list.map((item, index) => {
         return (
-          <ListItem key={item.accountId + '' + index}>
+          <ListItem key={item.accountId + '' + index} onClick={() => enterDetail(item)}>
             <div className="img_wrapper">
               <LazyLoadImage src={`${item.picUrl}?param=300x300`}
                 width="100%" height="100%"
@@ -41,13 +46,14 @@ const renderSingerList = (props) => {
   )
 }
 
-function Singer(props) {
+function Singers(props) {
   const { singerList, enterLoading, pageCount, pullUpLoading, pullDownLoading } = props;
   const { getHotSingerDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
   // let [category, setCategory] = useState('');
   // let [alpha, setAlpha] = useState('');
   const { data, dispatch } = useContext(CategoryDataContext)
   const { category, alpha } = data.toJS()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!singerList.size) {
@@ -76,28 +82,31 @@ function Singer(props) {
     pullDownRefreshDispatch(category, alpha)
   }
   return (
-    <NavContainer>
-      <Horizen
-        list={categoryTypes}
-        title={'分类(默认热门):'}
-        handleClick={handleUpdateCategory}
-        oldVal={category} />
-      <Horizen
-        list={alphaTypes}
-        title={'首字母:'}
-        handleClick={handleUpdateAlpha}
-        oldVal={alpha} />
-      <ListContainer>
-        <Scroll
-          pullUp={handlePullUp}
-          pullDown={handlePullDown}
-          pullUpLoading={pullUpLoading}
-          pullDownLoading={pullDownLoading}>
-          {renderSingerList({ singerList })}
-        </Scroll>
-        <Loading show={enterLoading}></Loading>
-      </ListContainer>
-    </NavContainer>
+    <>
+      <NavContainer>
+        <Horizen
+          list={categoryTypes}
+          title={'分类(默认热门):'}
+          handleClick={handleUpdateCategory}
+          oldVal={category} />
+        <Horizen
+          list={alphaTypes}
+          title={'首字母:'}
+          handleClick={handleUpdateAlpha}
+          oldVal={alpha} />
+        <ListContainer>
+          <Scroll
+            pullUp={handlePullUp}
+            pullDown={handlePullDown}
+            pullUpLoading={pullUpLoading}
+            pullDownLoading={pullDownLoading}>
+            {renderSingerList({ singerList, navigate })}
+          </Scroll>
+          <Loading show={enterLoading}></Loading>
+        </ListContainer>
+      </NavContainer>
+      <Outlet />
+    </>
   )
 }
 
@@ -140,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Singer));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Singers));

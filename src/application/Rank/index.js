@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Outlet } from "react-router-dom";
+import { useNavigate } from 'react-router'
 import { getRankList } from './store/index'
 import Loading from '../../baseUI/loading';
 import {
@@ -11,8 +13,6 @@ import {
 import Scroll from '../../baseUI/scroll/index';
 import { EnterLoading } from './../Singers/style';
 import { filterIndex } from '../../api/utils';
-import { Outlet } from "react-router-dom";
-import { useNavigate } from 'react-router'
 
 function Rank(props) {
   const { rankList: list, loading } = props;
