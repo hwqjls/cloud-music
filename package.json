@@ -74,9 +74,10 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -149,5 +150,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0"
   }
 }
