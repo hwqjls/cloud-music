@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import style from '../../assets/global-style';
+import style from '@/assets/global-style';
 
 // Props中的globalRank和tracks.length均代表是否为全球榜
 

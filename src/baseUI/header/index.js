@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import style from '../../assets/global-style';
+import style from '@/assets/global-style';
 
 const HeaderContainer = styled.div`
   position: fixed;

@@ -1,5 +1,5 @@
 import { fromJS } from "immutable";
-import { getRankListRequest } from "../../../api/request";
+import { getRankListRequest } from "@/api/request";
 
 export const CHANGE_RANK_LIST = 'rank/CHANGE_RANK_LIST';
 export const CHANGE_LOADING = 'rank/CHANGE_LOADING';

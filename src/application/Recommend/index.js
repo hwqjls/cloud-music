@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Content } from './style'
-import { RecommendList, Slider } from '../../componenets';
-import { Scroll, Loading } from './../../baseUI'
+import { RecommendList, Slider } from '@/componenets';
+import { Scroll, Loading } from '@/baseUI'
 import * as actionTypes from './store/actionCreators';
 
 function Recommend(props) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Outlet } from "react-router-dom";
 import { useNavigate } from 'react-router'
 import { getRankList } from './store/index'
-import { Scroll, Loading } from '../../baseUI';
+import { Scroll, Loading } from '@/baseUI';
 import {
   List,
   ListItem,
@@ -11,7 +11,7 @@ import {
   Container
 } from './style';
 import { EnterLoading } from './../Singers/style';
-import { filterIndex } from '../../api/utils';
+import { filterIndex } from '@/api/utils';
 
 function Rank(props) {
   const { rankList: list, loading } = props;

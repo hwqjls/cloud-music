@@ -2,8 +2,8 @@ import React, { memo, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router'
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Horizen, Scroll, Loading } from '../../baseUI';
-import { categoryTypes, alphaTypes } from '../../api/mock';
+import { Horizen, Scroll, Loading } from '@/baseUI';
+import { categoryTypes, alphaTypes } from '@/api/mock';
 import { NavContainer, ListContainer, List, ListItem } from './style';
 import {
   getSingerList,

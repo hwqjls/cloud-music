@@ -6,7 +6,7 @@ import {
   ListItem,
   List
 } from './style';
-import { getCount } from './../../api/utils.js'
+import { getCount } from '@/api/utils.js'
 
 function RecommendList({ recommendList }) {
   const navigate = useNavigate()

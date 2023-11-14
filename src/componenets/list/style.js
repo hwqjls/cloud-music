@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import style from '../../assets/global-style';
+import style from '@/assets/global-style';
 
 export const ListWrapper = styled.div`
   max-width: 100%;

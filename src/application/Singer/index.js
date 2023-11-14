@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate, useHref } from 'react-router';
 import { CSSTransition } from "react-transition-group";
 import { Container, ImgWrapper, CollectButton, BgLayer, SongListWrapper } from "./style";
-import { artist } from "../../api/mock";
-import { Header, Scroll } from './../../baseUI';
+import { artist } from "@/api/mock";
+import { Header, Scroll } from '@/baseUI';
 import SongsList from './../SongsList';
 
 function Singer(props) {

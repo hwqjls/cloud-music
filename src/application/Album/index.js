@@ -3,10 +3,10 @@ import { useNavigate, useParams, useHref } from 'react-router';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { Container, TopDesc, Menu } from './style';
-import { Header, Scroll, Loading } from './../../baseUI';
-import { HEADER_HEIGHT } from '../../api/mock';
-import { isEmptyObject } from '../../api/utils';
-import style from '../../assets/global-style';
+import { Header, Scroll, Loading } from '@/baseUI';
+import { HEADER_HEIGHT } from '@/api/mock';
+import { isEmptyObject } from '@/api/utils';
+import style from '@/assets/global-style';
 import { getAlbumList, changeEnterLoading } from './store/actionCreators';
 import SongsList from '../SongsList';
 

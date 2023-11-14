@@ -1,5 +1,5 @@
 import { CHANGE_CURRENT_ALBUM, CHANGE_ENTER_LOADING } from "./constants";
-import { getAlbumDetailRequest } from "../../../api/request";
+import { getAlbumDetailRequest } from "@/api/request";
 import { fromJS } from "immutable";
 
 const changeCurrentAlbum = (data) => ({

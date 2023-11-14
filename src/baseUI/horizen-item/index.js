@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, memo } from 'react';
-import Scroll from '../scroll/index';
+import Scroll from '../scroll';
 import { PropTypes } from 'prop-types';
 import { List, ListItem } from './style';
 

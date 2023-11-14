@@ -1,6 +1,6 @@
 import React from 'react';
 import { SongList, SongItem } from "./style";
-import { getName } from '../../api/utils';
+import { getName } from '@/api/utils';
 
 const SongsList = React.forwardRef((props, refs) => {
   const { collectCount, showCollect, songs } = props;

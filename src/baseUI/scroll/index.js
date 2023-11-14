@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, useEffect, useRef, useImperativeHandle, useMemo } from "react"
 import PropTypes from "prop-types"
 import BScroll from "better-scroll"
-import { debounce } from "../../api/utils";
+import { debounce } from "@/api/utils";
 import Loading from '../loading';
 import LoadingV2 from '../loading-v2';
 import { ScrollContainer, PullUpLoading, PullDownLoading } from './style'
