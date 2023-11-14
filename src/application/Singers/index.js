@@ -1,9 +1,8 @@
-import React, { useState, memo, useEffect, useContext } from 'react';
+import React, { memo, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router'
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Horizen from '../../baseUI/horizen-item';
-import Scroll from './../../baseUI/scroll'
+import { Horizen, Scroll, Loading } from '../../baseUI';
 import { categoryTypes, alphaTypes } from '../../api/mock';
 import { NavContainer, ListContainer, List, ListItem } from './style';
 import {
@@ -16,7 +15,6 @@ import {
   changePullDownLoading,
   refreshMoreHotSingerList
 } from './store/actionCreators';
-import Loading from '../../baseUI/loading'
 import { CategoryDataContext, CHANGE_ALPHA, CHANGE_CATEGORY } from './data';
 
 const renderSingerList = (props) => {

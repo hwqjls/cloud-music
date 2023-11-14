@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { Outlet } from "react-router-dom";
 import { useNavigate } from 'react-router'
 import { getRankList } from './store/index'
-import Loading from '../../baseUI/loading';
+import { Scroll, Loading } from '../../baseUI';
 import {
   List,
   ListItem,
   SongList,
   Container
 } from './style';
-import Scroll from '../../baseUI/scroll/index';
 import { EnterLoading } from './../Singers/style';
 import { filterIndex } from '../../api/utils';
 

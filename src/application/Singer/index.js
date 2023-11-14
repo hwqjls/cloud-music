@@ -3,8 +3,7 @@ import { useNavigate, useHref } from 'react-router';
 import { CSSTransition } from "react-transition-group";
 import { Container, ImgWrapper, CollectButton, BgLayer, SongListWrapper } from "./style";
 import { artist } from "../../api/mock";
-import Header from './../../baseUI/header/index';
-import Scroll from '../../baseUI/scroll';
+import { Header, Scroll } from './../../baseUI';
 import SongsList from './../SongsList';
 
 function Singer(props) {
