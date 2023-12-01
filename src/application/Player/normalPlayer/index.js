@@ -12,7 +12,7 @@ import {
   ProgressWrapper
 } from "./style";
 
-// import ProgressBar from "@/baseUI/progress-bar";
+import ProgressBar from "@/baseUI/progress-bar";
 import { playMode } from '@/api/mock';
 
 
@@ -157,7 +157,7 @@ function NormalPlayer(props) {
           </CDWrapper>
         </Middle>
         <Bottom className="bottom">
-          {/* <ProgressWrapper>
+          <ProgressWrapper>
             <span className="time time-l">{formatPlayTime(currentTime)}</span>
             <div className="progress-bar-wrapper">
               <ProgressBar
@@ -166,7 +166,7 @@ function NormalPlayer(props) {
               ></ProgressBar>
             </div>
             <div className="time time-r">{formatPlayTime(duration)}</div>
-          </ProgressWrapper> */}
+          </ProgressWrapper>
           <Operators>
             <div className="icon i-left" onClick={changeMode}>
               <i
